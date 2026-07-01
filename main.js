@@ -2,9 +2,6 @@ import './style.css';
 import './welcome.css';
 
 // ===== CONFIGURATION =====
-// Telegram Bot баптаулары (Осы жерге өзіңіздің токеніңізді және Chat ID қойыңыз)
-const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
-const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
 
 // Той уақыты: 14 Тамыз 2026 жыл, 15:00
 const EVENT_DATE = new Date('2026-08-14T15:00:00').getTime();
@@ -41,12 +38,9 @@ revealElements.forEach(el => {
   revealOnScroll.observe(el);
 });
 
-// ===== 3. MUSIC PLAYER & WELCOME SCREEN =====
+// ===== 3. WELCOME SCREEN =====
 const welcomeScreen = document.getElementById('welcomeScreen');
 const openBtn = document.getElementById('openBtn');
-const bgMusic = document.getElementById('bgMusic');
-const musicToggle = document.getElementById('musicToggle');
-let isPlaying = false;
 
 // When user clicks 'Open Invitation'
 const envelopeWrapper = document.getElementById('envelopeWrapper');
@@ -56,27 +50,7 @@ openBtn.addEventListener('click', () => {
   setTimeout(() => {
     welcomeScreen.classList.add('slide-up');
     document.body.style.overflow = 'auto'; // allow scrolling now
-    
-    // Play music
-    bgMusic.play().then(() => {
-      isPlaying = true;
-      musicToggle.classList.add('playing');
-    }).catch(e => console.log("Audio play failed:", e));
   }, 1500); // Wait 1.5 seconds for envelope animation
-});
-
-// Toggle music from the floating button
-musicToggle.addEventListener('click', () => {
-  if (isPlaying) {
-    bgMusic.pause();
-    musicToggle.classList.remove('playing');
-    musicToggle.innerHTML = '<i class="fa-solid fa-music" style="opacity: 0.5;"></i>';
-  } else {
-    bgMusic.play();
-    musicToggle.classList.add('playing');
-    musicToggle.innerHTML = '<i class="fa-solid fa-music"></i>';
-  }
-  isPlaying = !isPlaying;
 });
 
 
@@ -111,64 +85,7 @@ const updateCountdown = setInterval(() => {
 }, 1000);
 
 
-// ===== 5. RSVP FORM (TELEGRAM BOT) =====
-const rsvpForm = document.getElementById('rsvpForm');
-const rsvpSuccess = document.getElementById('rsvpSuccess');
-
-if (rsvpForm) {
-  const submitBtn = rsvpForm.querySelector('button[type="submit"]');
-  rsvpForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.innerText = 'Күте тұрыңыз...';
-    }
-    
-    const formData = new FormData(rsvpForm);
-    const guestName = formData.get('guestName');
-    const attendance = formData.get('attendance');
-    const guestCount = formData.get('guestCount') || 'көрсетілмеген';
-    
-    const message = `
-🎉 <b>Тұсаукесер той (Айсезім)</b>
-👤 <b>Есімі:</b> ${guestName}
-✅ <b>Жауабы:</b> ${attendance}
-👥 <b>Қонақтар саны:</b> ${guestCount}
-    `;
-
-    try {
-      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message,
-          parse_mode: 'HTML'
-        })
-      });
-
-      if (response.ok) {
-        if (rsvpSuccess) rsvpSuccess.classList.remove('hidden');
-      } else {
-        console.error('Telegram API қатесі');
-        // Оffline / қате болса да success көрсетеміз (демо үшін)
-        if (rsvpSuccess) rsvpSuccess.classList.remove('hidden'); 
-      }
-    } catch (error) {
-      console.error('Қате:', error);
-      // Оffline / қате болса да success көрсетеміз (демо үшін)
-      if (rsvpSuccess) rsvpSuccess.classList.remove('hidden');
-    } finally {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerText = 'ЖАУАПТЫ ЖІБЕРУ';
-      }
-    }
-  });
-}
+// Telegram RSVP logic removed
 // ===== 6. PARTICLES (Hero section background) =====
 function createParticles() {
   const container = document.getElementById('particles');
@@ -235,106 +152,79 @@ function createButterflies() {
 
 createButterflies();
 
-// ===== 8. MUSIC CONTROL =====
-document.addEventListener('DOMContentLoaded', () => {
-  const bgMusic = document.getElementById('bgMusic');
-  const musicToggleBtn = document.getElementById('musicToggle');
-  const musicIcon = document.querySelector('#musicToggle i');
-  let isPlaying = false;
-
-  if (bgMusic && musicToggleBtn) {
-    // Start playing on first user interaction
-    const initAudio = () => {
-      // Әуеннің басын (интро) өткізіп жіберу үшін 15 секундтан бастайды
-      if (bgMusic.currentTime === 0) {
-        bgMusic.currentTime = 18; 
-      }
-      
-      bgMusic.play().then(() => {
-        isPlaying = true;
-        musicToggleBtn.classList.add('playing');
-        musicIcon.classList.remove('fa-music');
-        musicIcon.classList.add('fa-pause');
-      }).catch(err => {
-        console.log('Audio autoplay prevented:', err);
-      });
-      // Remove event listeners once triggered
-      document.removeEventListener('click', initAudio);
-      document.removeEventListener('scroll', initAudio);
-    };
-
-    document.addEventListener('click', initAudio);
-    document.addEventListener('scroll', initAudio);
-
-    // Toggle play/pause
-    musicToggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation(); // prevent initAudio from triggering simultaneously
-      if (isPlaying) {
-        bgMusic.pause();
-        musicToggleBtn.classList.remove('playing');
-        musicIcon.classList.remove('fa-pause');
-        musicIcon.classList.add('fa-music');
-      } else {
-        bgMusic.play();
-        musicToggleBtn.classList.add('playing');
-        musicIcon.classList.remove('fa-music');
-        musicIcon.classList.add('fa-pause');
-      }
-      isPlaying = !isPlaying;
-    });
-  }
-});
+// Music control removed
 
 // ===== 9. RSVP GOOGLE SHEETS INTEGRATION =====
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx6LthOP89AUYYFoj5ffph7Fl0L9tBnSmFuCf-FBIV0MHJmJ_90wiphVlf0K3osL_pA-A/exec";
 
-function sendRSVP(e) {
+async function sendRSVP(e) {
   e.preventDefault();
 
   const rsvpForm = document.getElementById('rsvpForm');
   const submitBtn = rsvpForm.querySelector('.rsvp-submit-btn');
-  const originalText = submitBtn.textContent;
+  const originalText = submitBtn ? submitBtn.textContent : 'ЖАУАПТЫ ЖІБЕРУ';
   
-  submitBtn.textContent = "Күте тұрыңыз...";
-  submitBtn.disabled = true;
+  if (submitBtn) {
+    submitBtn.textContent = "Күте тұрыңыз...";
+    submitBtn.disabled = true;
+  }
 
   const formData = new FormData(rsvpForm);
   const name = formData.get('guestName');
   const attendance = formData.get('attendance');
-  const guests = formData.get('guestCount');
+  const guests = formData.get('guestCount') || '1 адам'; // Default just in case
 
-  fetch(WEB_APP_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      name: name,
-      attendance: attendance,
-      guests: guests
-    })
-  })
-  .then(response => {
-    // Егер жауап сәтті болса
-    alert("Жауабыңыз қабылданды ❤️");
-    rsvpForm.style.display = 'none';
-    const rsvpSuccess = document.getElementById('rsvpSuccess');
-    if (rsvpSuccess) {
-      rsvpSuccess.classList.remove('hidden');
-    }
-  })
-  .catch(error => {
-    alert("Қате орын алды");
-    console.error(error);
-  })
-  .finally(() => {
-    submitBtn.textContent = originalText;
-    submitBtn.disabled = false;
+  const requestBody = JSON.stringify({
+    name: name,
+    attendance: attendance,
+    guests: guests
   });
+
+  console.log("Жіберілетін мәліметтер (JSON):", requestBody);
+  console.log("Жіберілетін URL:", WEB_APP_URL);
+
+  try {
+    const response = await fetch(WEB_APP_URL, {
+      method: "POST",
+      headers: {
+        // Мы используем text/plain чтобы избежать ошибки CORS preflight OPTIONS,
+        // которую Google Apps Script по умолчанию не поддерживает корректно.
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: requestBody
+    });
+
+    console.log("Жауап статусы (response.status):", response.status);
+    
+    // Читаем текст ответа от Google Apps Script
+    const responseText = await response.text();
+    console.log("Жауап мәтіні (response.text):", responseText);
+
+    // Любой 2xx статус или opaque ответ (если Apps Script возвращает редирект без CORS) считается успешным
+    if (response.ok || response.type === 'opaque') {
+      alert("Жауабыңыз қабылданды ❤️");
+      rsvpForm.style.display = 'none';
+      const rsvpSuccess = document.getElementById('rsvpSuccess');
+      if (rsvpSuccess) {
+        rsvpSuccess.classList.remove('hidden');
+      }
+    } else {
+      throw new Error(`Google Apps Script қате қайтарды. Статус: ${response.status}. Мәтін: ${responseText}`);
+    }
+  } catch (error) {
+    console.error("Fetch қатесі немесе CORS:", error);
+    alert("Кешіріңіз, жіберу кезінде қате орын алды.\\nСебебі: " + error.message);
+  } finally {
+    if (submitBtn) {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const rsvpForm = document.getElementById('rsvpForm');
   if (rsvpForm) {
-    // Бұрынғы Telegram функциясын (егер болса) жойып, жаңасын қосамыз
-    rsvpForm.removeEventListener('submit', window.sendToTelegram);
     rsvpForm.addEventListener('submit', sendRSVP);
   }
 });
