@@ -54,13 +54,26 @@ openBtn.addEventListener('click', () => {
     welcomeScreen.classList.add('slide-up');
     document.body.style.overflow = 'auto'; // allow scrolling now
     
-    // Play music starting from 17 seconds
+    // Play music starting from vocals (approx 14.5s) robustly
     if (bgMusic) {
-      bgMusic.currentTime = 17;
-      bgMusic.play().then(() => {
-        isPlaying = true;
-        if (musicToggle) musicToggle.classList.add('playing');
-      }).catch(e => console.log("Audio play failed:", e));
+      const playAudio = () => {
+        bgMusic.currentTime = 14.5;
+        bgMusic.play().then(() => {
+          // Enforce currentTime for iOS/Safari if it was ignored
+          if (bgMusic.currentTime < 14) {
+            bgMusic.currentTime = 14.5;
+          }
+          isPlaying = true;
+          if (musicToggle) musicToggle.classList.add('playing');
+        }).catch(e => console.log("Audio play failed:", e));
+      };
+
+      if (bgMusic.readyState >= 1) {
+        playAudio();
+      } else {
+        bgMusic.addEventListener('loadedmetadata', playAudio, { once: true });
+        bgMusic.load(); // force load metadata
+      }
     }
   }, 1500); // Wait 1.5 seconds for envelope animation
 });
