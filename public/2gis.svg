@@ -1,0 +1,31 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="squircle">
+      <rect x="0" y="0" width="512" height="512" rx="115" ry="115" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#squircle)">
+    <!-- Base Orange -->
+    <rect x="0" y="0" width="512" height="512" fill="#F7B200"/>
+    
+    <!-- Mid Green -->
+    <polygon points="-20,100 532,190 532,532 -20,532" fill="#1C9B31"/>
+    
+    <!-- Light Green -->
+    <polygon points="-20,450 532,380 532,532 -20,532" fill="#8CC63F"/>
+    
+    <!-- Roads (White lines) -->
+    <line x1="-20" y1="100" x2="532" y2="190" stroke="#FFFFFF" stroke-width="22"/>
+    <line x1="-20" y1="450" x2="532" y2="380" stroke="#FFFFFF" stroke-width="22"/>
+    
+    <!-- The Blue Pin -->
+    <path d="M 256 70 
+             A 130 130 0 0 0 140 260 
+             Q 210 270 240 400 
+             L 256 430 
+             L 272 400 
+             Q 302 270 372 260 
+             A 130 130 0 0 0 256 70 Z" 
+          fill="#006AF6" stroke="#FFFFFF" stroke-width="24" stroke-linejoin="round"/>
+  </g>
+</svg>

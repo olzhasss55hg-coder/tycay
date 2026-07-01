@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="kk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Айсезімнің Тұсаукесер Тойы</title>
+    <!-- Fonts: Inter for general text, Playfair Display for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Caveat:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/welcome.css" />
+  </head>
+  <body>
+    <!-- 1. LOADER -->
+    <div id="loader" class="loader-wrapper">
+      <div class="loader-content">
+        <div class="spinner"></div>
+        <h2 class="loader-text fade-in-text">Айсезімнің тұсаукесері</h2>
+      </div>
+    </div>
+
+
+    <!-- WELCOME SCREEN & AUDIO -->
+    <div id="welcomeScreen" class="welcome-screen">
+      <div class="envelope-container" id="envelopeWrapper">
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="pocket-bottom"></div>
+          <div class="letter">
+            <h2 class="welcome-title">Айсезім</h2>
+            <p class="welcome-subtitle">1 жас & Тұсау кесер</p>
+          </div>
+          <div id="openBtn" class="wax-seal">Ашу</div>
+        </div>
+      </div>
+    </div>
+    
+  <audio id="bgMusic" loop preload="auto">
+    <source src="/bg-music.m4a" type="audio/mp4">
+  </audio>
+    
+    <button id="musicToggle" class="music-toggle">
+      <i class="fa-solid fa-music"></i>
+    </button>
+
+    <main class="main-content">
+      <!-- 2. HERO SECTION -->
+      <!-- 2. HERO SECTION -->
+      <section class="hero-section" id="hero">
+        <img src="/flower.png" class="flower-top-right" alt="Flower">
+        <img src="/flower.png" class="flower-mid-left" alt="Flower">
+        
+        <div class="particles" id="particles"></div>
+        
+        <div class="hero-content">
+          <h1 class="hero-name">Айсезім</h1>
+          <h2 class="hero-event">1 ЖАС<br>ТҰСАУ КЕСЕР</h2>
+        </div>
+        
+        <div class="hero-baby-wrapper">
+          <img src="/baby.png" class="hero-baby-img" alt="Айсезім">
+          <img src="/flower.png" class="flower-bottom-right" alt="Flower">
+        </div>
+      </section>
+
+      <!-- 4. INVITATION TEXT -->
+      <section class="invitation-text reveal" id="invitation">
+        <img src="/flower.png" class="flower-bg-1" alt="Flower">
+        <div class="text-container">
+          <p class="greeting">Құрметті ағайын-туыс, бауырлар!</p>
+          <p class="main-text">
+            Көз қуанышымыз <span class="highlight">Айсезімнің</span> 1 жасқа толуы мен тәй-тәй басқан қадамына арналған тұсаукесер тойы!<br><br>
+            Сіздерді осы керемет қуанышымыздың қадірлі қонағы болуға шақырамыз. Ақ тілектеріңізді арнап, тойымыздың төрінде жарқырап отыруға асығыңыздар! ❤️
+          </p>
+        </div>
+      </section>
+
+      <!-- 5. EVENT INFO CARDS -->
+      <section class="info-section reveal" id="info">
+        <div class="elegant-details-card">
+          <div class="detail-item">
+            <p class="detail-label">Салтанатты жиын күні</p>
+            <h3 class="detail-value">14 Тамыз, 2026 жыл</h3>
+          </div>
+          
+          <div class="floral-divider">
+            <img src="/flower.png" alt="divider">
+          </div>
+          
+          <div class="detail-item">
+            <p class="detail-label">Басталу уақыты</p>
+            <h3 class="detail-value">Сағат 15:00-де</h3>
+          </div>
+          
+          <div class="floral-divider">
+            <img src="/flower.png" alt="divider">
+          </div>
+          
+          <div class="detail-item">
+            <p class="detail-label">Той өтетін орын</p>
+            <h3 class="detail-value">«Венеция» мейрамханасы</h3>
+            <p class="detail-sub">Павлодар қ., Малайсары батыр көшесі, 11/9</p>
+          </div>
+
+          <div class="floral-divider" style="margin-top: 40px; margin-bottom: 30px;">
+            <img src="/flower.png" alt="divider">
+          </div>
+
+          <h2 class="section-title" style="margin-bottom: 20px; font-size: 2.5rem;">Тойдың басталуына қалды</h2>
+          <div class="timer-container" id="timer">
+            <div class="time-box">
+              <span id="days">00</span>
+              <p>күн</p>
+            </div>
+            <div class="time-box">
+              <span id="hours">00</span>
+              <p>сағат</p>
+            </div>
+            <div class="time-box">
+              <span id="minutes">00</span>
+              <p>минут</p>
+            </div>
+            <div class="time-box">
+              <span id="seconds">00</span>
+              <p>секунд</p>
+            </div>
+          </div>
+          <div id="timerMessage" class="hidden timer-message">Қош келдіңіздер ❤️</div>
+        </div>
+      </section>
+
+      <!-- 7. CALENDAR SECTION -->
+      <section class="calendar-section reveal" id="calendar" style="position: relative; overflow: hidden;">
+        <img src="/flower.png" class="flower-calendar-bg" alt="Flower">
+        <h2 class="section-title">Тамыз 2026</h2>
+        <div class="calendar-layout">
+          <div class="calendar-baby-wrapper">
+            <img src="/baby.png" alt="Baby" class="calendar-baby-img">
+          </div>
+          <div class="calendar-wrapper">
+            <div class="calendar-header">
+              <span>Дс</span><span>Сс</span><span>Ср</span><span>Бс</span><span>Жм</span><span>Сн</span><span>Жк</span>
+            </div>
+            <div class="calendar-grid">
+              <!-- 1 тамыз сенбі күнінен басталады (2026 жылы 1 тамыз - Сенбі) -->
+              <span class="empty"></span><span class="empty"></span><span class="empty"></span><span class="empty"></span><span class="empty"></span>
+              <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+              <span>10</span><span>11</span><span>12</span><span>13</span>
+              <span class="highlight-day">14<i class="fa-solid fa-heart"></i></span>
+              <span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span>
+              <span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- 8. LOCATION SECTION -->
+      <section class="location-section reveal" id="location" style="padding: 100px 20px; text-align: center; background-color: transparent; position: relative; overflow: hidden;">
+        <img src="/flower.png" class="flower-location-bg" alt="Flower">
+        <h2 style="font-family: var(--font-cursive); font-size: 4rem; color: #4a3b32; margin-bottom: 20px;">Мекен-жайымыз:</h2>
+        
+        <div style="font-family: var(--font-cursive); font-size: 2.2rem; color: #c49a45; line-height: 1.6; margin-bottom: 50px;">
+          <p>Павлодар қаласы,</p>
+          <p>Малайсары батыр көшесі, 11/9.</p>
+          <p>«Венеция» мейрамханасы</p>
+        </div>
+
+        <div style="position: relative; display: inline-block; margin-top: 30px;">
+          <!-- SVG Dotted Arrow -->
+          <svg class="dotted-arrow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 0 0 C 0 80, 40 90, 80 90" stroke="#4a3b32" stroke-width="2.5" stroke-dasharray="6 6" fill="none"/>
+            <polygon points="75,84 90,90 75,96" fill="#4a3b32"/>
+          </svg>
+          
+          <a href="https://2gis.kz/pavlodar/search/%D0%9C%D0%B0%D0%BB%D0%B0%D0%B9%D1%81%D0%B0%D1%80%D1%8B%20%D0%B1%D0%B0%D1%82%D1%8B%D1%80%D0%B0%2011%2F9" target="_blank" class="twogis-icon-btn">
+             <img src="/2gis.svg" alt="2GIS" style="width: 100%; height: 100%; border-radius: 25px; object-fit: cover; display: block;">
+          </a>
+        </div>
+      </section>
+
+      <!-- 9.5 HOSTS SECTION -->
+      <section class="hosts-section reveal" style="text-align: center; margin-bottom: 40px; position: relative;">
+          <div class="hosts-wrapper" style="margin-bottom: 0;">
+            <div class="ornament ornament-top"></div>
+            <h2 class="hosts-title">Той иелері:</h2>
+            <h3 class="hosts-names">Жігер-Әсемгүл</h3>
+            <div class="ornament ornament-bottom"></div>
+          </div>
+      </section>
+
+      <!-- 10. RSVP SECTION (ҚОНАҚҚА ХАБАРЛАМА) -->
+      <section class="rsvp-section reveal" id="rsvp" style="position: relative; overflow: hidden; padding-top: 20px;">
+        <img src="/flower.png" class="flower-rsvp-bg" alt="Flower">
+        
+        <h2 class="rsvp-main-title">ҚОНАҚҚА ХАБАРЛАМА</h2>
+        <div class="rsvp-divider"></div>
+
+        <div class="rsvp-card-new">
+          <p class="rsvp-welcome-text">Сіздің келуіңіз біз үшін үлкен қуаныш болады ❤️</p>
+          
+          <form id="rsvpForm" class="rsvp-form-new">
+            <div class="form-group">
+              <label>ЕСІМІҢІЗ</label>
+              <input type="text" name="guestName" placeholder="Есіміңізді жазыңыз" required>
+            </div>
+
+            <div class="form-group">
+              <label>ТОЙҒА ҚАТЫСУЫҢЫЗ</label>
+              <div class="attendance-options">
+                <label class="attendance-card">
+                  <input type="radio" name="attendance" value="Келемін" required>
+                  <div class="attendance-card-content">
+                    <div class="attendance-icon check-icon"><i class="fa-solid fa-check"></i></div>
+                    <span>Келемін</span>
+                  </div>
+                </label>
+                <label class="attendance-card">
+                  <input type="radio" name="attendance" value="Келе алмаймын">
+                  <div class="attendance-card-content">
+                    <div class="attendance-icon cross-icon"><i class="fa-solid fa-xmark"></i></div>
+                    <span>Келе алмаймын</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>ҚОНАҚТАР САНЫ</label>
+              <div class="select-wrapper">
+                <select name="guestCount">
+                  <option value="1 адам">1 адам</option>
+                  <option value="2 адам">2 адам</option>
+                  <option value="3 адам">3 адам</option>
+                  <option value="4 адам">4 адам</option>
+                  <option value="5 адам">5 адам</option>
+                  <option value="6 адам">6 адам</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-icon"></i>
+              </div>
+            </div>
+
+            <button type="submit" class="rsvp-submit-btn">ЖАУАПТЫ ЖІБЕРУ</button>
+          </form>
+
+          <div id="rsvpSuccess" class="rsvp-success hidden">
+            <i class="fa-solid fa-check-circle"></i>
+            <p>Рақмет! Жауабыңыз қабылданды.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. CLOSING SECTION -->
+      <section class="closing-section reveal" id="closing" style="text-align: center; padding: 60px 20px; position: relative; overflow: hidden; margin-top: 40px; margin-bottom: 40px;">
+        <img src="/flower.png" class="flower-bg-2" alt="Flower">
+        <h2 style="font-family: var(--font-heading); font-size: 2.8rem; color: var(--color-gold); margin-bottom: 20px; line-height: 1.4;">Тойымыздың қадірлі қонағы болыңыздар!</h2>
+        <p style="font-size: 1.3rem; color: var(--color-text); font-family: 'Montserrat', sans-serif;">Сіздерді қуанышпен күтеміз! 🌸</p>
+      </section>
+
+      <!-- 12. FOOTER -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-ornament"></div>
+          <p>Махаббатпен Жігер және Әсемгүл отбасы ❤️</p>
+        </div>
+      </footer>
+    </main>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
