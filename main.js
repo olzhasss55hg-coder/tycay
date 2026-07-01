@@ -1,3 +1,6 @@
+import './style.css';
+import './welcome.css';
+
 // ===== CONFIGURATION =====
 // Telegram Bot баптаулары (Осы жерге өзіңіздің токеніңізді және Chat ID қойыңыз)
 const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';

@@ -1,6 +1,7 @@
 const { spawn } = require('child_process');
 
-const deploy = spawn('npx.cmd', ['surge', 'dist', 'aysezim-toy.surge.sh'], { shell: true });
+const domain = 'aysezim-tusaukeser-2026.surge.sh';
+const deploy = spawn('npx.cmd', ['surge', 'dist', domain], { shell: true });
 
 deploy.stdout.on('data', (data) => {
   const output = data.toString();
