@@ -38,9 +38,12 @@ revealElements.forEach(el => {
   revealOnScroll.observe(el);
 });
 
-// ===== 3. WELCOME SCREEN =====
+// ===== 3. WELCOME SCREEN & MUSIC =====
 const welcomeScreen = document.getElementById('welcomeScreen');
 const openBtn = document.getElementById('openBtn');
+const bgMusic = document.getElementById('bgMusic');
+const musicToggle = document.getElementById('musicToggle');
+let isPlaying = false;
 
 // When user clicks 'Open Invitation'
 const envelopeWrapper = document.getElementById('envelopeWrapper');
@@ -50,8 +53,33 @@ openBtn.addEventListener('click', () => {
   setTimeout(() => {
     welcomeScreen.classList.add('slide-up');
     document.body.style.overflow = 'auto'; // allow scrolling now
+    
+    // Play music starting from 17 seconds
+    if (bgMusic) {
+      bgMusic.currentTime = 17;
+      bgMusic.play().then(() => {
+        isPlaying = true;
+        if (musicToggle) musicToggle.classList.add('playing');
+      }).catch(e => console.log("Audio play failed:", e));
+    }
   }, 1500); // Wait 1.5 seconds for envelope animation
 });
+
+// Toggle music from the floating button
+if (musicToggle) {
+  musicToggle.addEventListener('click', () => {
+    if (isPlaying) {
+      bgMusic.pause();
+      musicToggle.classList.remove('playing');
+      musicToggle.innerHTML = '<i class="fa-solid fa-music" style="opacity: 0.5;"></i>';
+    } else {
+      bgMusic.play();
+      musicToggle.classList.add('playing');
+      musicToggle.innerHTML = '<i class="fa-solid fa-music"></i>';
+    }
+    isPlaying = !isPlaying;
+  });
+}
 
 
 // ===== 4. COUNTDOWN TIMER =====
